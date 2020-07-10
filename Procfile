@@ -1,0 +1,1 @@
+worker: python -m http.server 80 --directory "maxstuff.net/public_html"
