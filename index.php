@@ -1,0 +1,1 @@
+<?php header( 'Location: maxstuff.net/public_html/index.html' ) ;  ?>
