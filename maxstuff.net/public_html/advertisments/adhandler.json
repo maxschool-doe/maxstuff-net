@@ -5,7 +5,7 @@ function loadData (callback) {
 			callback(this.responseText);
 		}
 	};
-	xhttp.open("GET", "ads.json", true);
+	xhttp.open("GET", "//"+document.domain+"/advertisments/ads.json", true);
 	xhttp.send();
 }
 
@@ -19,10 +19,13 @@ function setAdvertisments () {
 			/*console.log(documentelement);
 			*/documentelement.innerHTML = '';
 			var image = document.createElement("img");
-			image.src = adsdata[keys[i]][0];
+			image.src = "//"+document.domain+adsdata[keys[i]][0];
 			image.style.maxWidth = adsdata[keys[i]][1];
 			image.style.maxHeight = adsdata[keys[i]][2];
-			documentelement.appendChild(image);
+			var anchor = document.createElement("a");
+			anchor.href = adsdata[keys[i]][3];
+			anchor.appendChild(image);
+			documentelement.appendChild(anchor);
 		}
 	}
 	})
