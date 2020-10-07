@@ -1,0 +1,92 @@
+<!--ScoreBoard App www.maxstuff.net/scoreboard-->
+
+<head>
+  <meta name="google-site-verification" content="yUZ-TRV5HUKh5k8HmpiaNE-pSJEOC1WpkuUcuYgRxqk" />
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-160826511-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-160826511-1');
+</script>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-WDJQQDQ');</script>
+<!-- End Google Tag Manager -->
+  <title>ScoreBoard</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+  @import url('https://fonts.googleapis.com/css?family=Comfortaa&display=swap');
+	* {
+	margin: 0;
+	}
+    h1 {
+      color:blue;
+      font-family:"Comfortaa";
+	  text-align: center;
+    }
+	p {
+      color:#525252;
+      font-weight:bold;
+      font-family:"Comfortaa";
+    }
+	.scoresection {
+		text-align: center;
+		display: inline-block;
+		width: 49vw;
+		margin: 0;
+	}
+	.scoresection > input {
+		width: 100%;
+		text-align: center;
+		font-size: 10vmin;
+	}
+	.scoresection > h1 {
+		font-size: 50vmin;
+	}
+	.scoresection > button {
+		width: 10vw;
+		height: 10vh;
+		font-size: 5vmin;
+	}
+	.playerOneText {
+		color: red;
+	}
+	.playerTwoText {
+		color: green;
+	}
+	#emaillink {
+		font-size: 5vmin;
+		font-weight: bold;
+		font-family:"Comfortaa";
+	}
+  </style>
+  <link rel="stylesheet" type="text/css" href="//wpcc.io/lib/1.0.2/cookieconsent.min.css"/><script src="//wpcc.io/lib/1.0.2/cookieconsent.min.js"></script><script>window.addEventListener("load", function(){window.wpcc.init({"border":"thick","corners":"large","colors":{"popup":{"background":"#edfdfa","text":"#000000","border":"#5ec2b6"},"button":{"background":"#5ec2b6","text":"#ffffff"}},"position":"bottom","padding":"small","fontsize":"large","content":{"href":"http://www.maxstuff.net/cookies/"}})});</script></head>
+<body>
+  <!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WDJQQDQ"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+  
+  <h1>
+ScoreBoard
+</h1>
+
+<div class="scoresection">
+	<input class="playerOneText" id="playerOneName" placeholder="Person One" oninput="emaillink.href='mailto:?subject='+playerOneName.value+' vs '+playerTwoName.value+'&body='+playerOneName.value+':'+scoreOne.textContent+' '+playerTwoName.value+':'+scoreTwo.textContent">
+	<h1 class="playerOneText" id="scoreOne">0</h1>
+	<button class="playerOneText" onclick="scoreOne.textContent=parseInt(scoreOne.textContent)-1;emaillink.href='mailto:?subject='+playerOneName.value+' vs '+playerTwoName.value+'&body='+playerOneName.value+':'+scoreOne.textContent+' '+playerTwoName.value+':'+scoreTwo.textContent">-</button>
+	<button class="playerOneText" onclick="scoreOne.textContent=parseInt(scoreOne.textContent)+1;emaillink.href='mailto:?subject='+playerOneName.value+' vs '+playerTwoName.value+'&body='+playerOneName.value+':'+scoreOne.textContent+' '+playerTwoName.value+':'+scoreTwo.textContent">+</button>
+</div>
+<div class="scoresection">
+	<input class="playerTwoText" id="playerTwoName" placeholder="Person Two" oninput="emaillink.href='mailto:?subject='+playerOneName.value+' vs '+playerTwoName.value+'&body='+playerOneName.value+':'+scoreOne.textContent+' '+playerTwoName.value+':'+scoreTwo.textContent">
+	<h1 class="playerTwoText" id="scoreTwo">0</h1>
+	<button class="playerTwoText" onclick="scoreTwo.textContent=parseInt(scoreTwo.textContent)-1;emaillink.href='mailto:?subject='+playerOneName.value+' vs '+playerTwoName.value+'&body='+playerOneName.value+':'+scoreOne.textContent+' '+playerTwoName.value+':'+scoreTwo.textContent">-</button>
+	<button class="playerTwoText" onclick="scoreTwo.textContent=parseInt(scoreTwo.textContent)+1;emaillink.href='mailto:?subject='+playerOneName.value+' vs '+playerTwoName.value+'&body='+playerOneName.value+':'+scoreOne.textContent+' '+playerTwoName.value+':'+scoreTwo.textContent">+</button>
+</div>
+<a id="emaillink" href='mailto:?subject= vs &body=:0 :0'>Email these results.</a>
