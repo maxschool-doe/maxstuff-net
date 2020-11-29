@@ -1,1 +1,1 @@
-web: node index.js
+web: python -m http.server --directory "maxstuff.net/public_html"
