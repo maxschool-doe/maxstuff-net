@@ -39,8 +39,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 	</p>
 	<p>
 		<span style="color:red;display:none;" id="timewarn">Please pick an end time <b>after</b> the start time.<br><br></span>
-		Availability Start Time: <input id="avStartTime" type="datetime-local"><br>
-		Availability End Time: <input id="avEndTime" type="datetime-local">
+		Airport: <select id="airportSelect"></select><br>
+		Availability Start Time: <input id="avStartTime" onchange="validateTime();" type="datetime-local"><br>
+		Availability End Time: <input id="avEndTime" onchange="validateTime();" type="datetime-local">
 	</p>
   <h1>Contact Me</h1>
   <p>

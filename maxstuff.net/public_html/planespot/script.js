@@ -18,7 +18,7 @@ function toDateObject(a) {
 	return new Date(a);
 }
 function deZone(a) {
-	return addDates(a,(0-a.getTimezoneOffset())*60)
+	return addDates(a,(0-a.getTimezoneOffset())*60);
 }
 
 function setTimeDefaults() {
@@ -50,14 +50,39 @@ function setTimeDefaults() {
 }
 
 function validateTime() {
-	if (toDateObject(avStartTime.value) >= toDateObject(avEndTime.value)) {
+	console.log(Number(toDateObject(avStartTime.value)));
+	console.log(Number(toDateObject(avEndTime.value)));
+	if (Number(toDateObject(avStartTime.value)) >= Number(toDateObject(avEndTime.value))) {
 		timewarn.style.display = "";
 	} else {
 		timewarn.style.display = "none";
 	}
 }
 
+function loadFlightData() {
+}
+
+function loadAirportsAvalible() {
+	$.get(
+		"http://airportapi.maxstuff.net",
+		function(data) {
+			parsedData=JSON.parse(data);
+			for (i = 0; i<parsedData.length; i++) {
+				newElement = document.createElement("option");
+				newElement.textContent = parsedData[i][0]+" - "+parsedData[i][1];
+				newElement.value = parsedData[i][0];
+				airportSelect.appendChild(newElement);
+			}
+			loadFlightData();
+		}
+	)
+}
+
 setTimeDefaults();
 validateTime();
-avStartTime.onchange = validateTime();
-avEndTime.onchange = validateTime();
+loadAirportsAvalible();
+
+airportSelect.onchange = function () {console.log("onchange")};
+
+
+
