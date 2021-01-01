@@ -1,3 +1,4 @@
 {
-  "root": "maxstuff.net/public_html/"
+  "root": "maxstuff.net/public_html/",
+	"canonical_host": "maxstuff-net.herokuapp.com"
 }
