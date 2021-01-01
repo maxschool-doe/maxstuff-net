@@ -74,6 +74,9 @@ function loadAirportsAvalible() {
 				airportSelect.appendChild(newElement);
 			}
 			loadFlightData();
+		},
+	).fail(function (data) {
+			console.log(data);
 		}
 	)
 }
