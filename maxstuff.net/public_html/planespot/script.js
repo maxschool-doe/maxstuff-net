@@ -128,12 +128,12 @@ function findTimes() {
 		flightCount = 0;
 		arrivalCount = 0;
 		departureCount = 0;
-		earliestTime = flightDataCache[i]["time"];
-		latestTime = flightDataCache[i]["time"]+timeAvalible;
+		earliestTime = Infinity;
+		latestTime = -Infinity;
 		aircraftTypes = [];
 		for (j = 0; j < flightDataCache.length-i; j++) {
 			if (flightDataCache[j]["cancelled"] == false) {
-				if (flightDataCache[j]["time"] < flightDataCache[i]["time"]+timeAvalible && flightDataCache[j]["time"] > flightDataCache[i]["time"] && startTime <= flightDataCache[j]["time"] && endTime >= flightDataCache[j]["time"] && !(flightDataCache[j]["aircraft"]=="143")) {//Javscript if statments suck!
+				if (flightDataCache[j]["est_time"] < flightDataCache[i]["est_time"]+timeAvalible && flightDataCache[j]["est_time"] > flightDataCache[i]["est_time"] && startTime <= flightDataCache[j]["est_time"] && endTime >= flightDataCache[j]["est_time"] && !(flightDataCache[j]["aircraft"]=="143")) {//Javscript if statments suck!
 					flightCount+=1;
 					if (flightDataCache[j]["arrival_departure"] == "a") {
 						arrivalCount += 1;
@@ -142,6 +142,12 @@ function findTimes() {
 					}
 					if (!aircraftTypes.includes(flightDataCache[j]["aircraft"])) {
 						aircraftTypes.push(flightDataCache[j]["aircraft"]);
+					}
+					if (flightDataCache[j]["est_time"] < earliestTime) {
+						earliestTime=flightDataCache[j]["est_time"];
+					}
+					if (flightDataCache[j]["est_time"] > latestTime) {
+						latestTime=flightDataCache[j]["est_time"];
 					}
 				}
 			}
@@ -165,14 +171,14 @@ function findTimes() {
 		colTwo.textContent=spottingTimesSorted[i][2];
 		colThree.textContent=spottingTimesSorted[i][3];
 		if (spottingTimesSorted[i][5] < startTime) {
-			colFour.textContent=(new Date(startTime*1000).toString().slice(0,24));
+			colFour.textContent=(new Date(startTime*1000).toString().slice(0,21));
 		} else {
-			colFour.textContent=(new Date(spottingTimesSorted[i][5]*1000).toString().slice(0,24));
+			colFour.textContent=(new Date(spottingTimesSorted[i][5]*1000).toString().slice(0,21));
 		}
 		if (spottingTimesSorted[i][6] > endTime) {
-			colFive.textContent=(new Date(endTime*1000).toString().slice(0,24));
+			colFive.textContent=(new Date(endTime*1000).toString().slice(0,21));
 		} else {
-			colFive.textContent=(new Date(spottingTimesSorted[i][6]*1000).toString().slice(0,24));
+			colFive.textContent=(new Date(spottingTimesSorted[i][6]*1000).toString().slice(0,21));
 		}
 		currentTableRowElement.appendChild(colOne);
 		currentTableRowElement.appendChild(colTwo);
