@@ -11,19 +11,19 @@ function addDates(a,b) {
 	}
 	return new Date(Math.round(apoch+bpoch)*1000);
 }
-function roundTime(a,x) {
+function roundTime(a,x) {//Rounds time to the nearest x seconds.
 	return new Date((Math.round((Number(new Date(a))/1000)/x)*1000)*x);
 }
-function toDateObject(a) {
+function toDateObject(a) {//Converts number to date object
 	return new Date(a);
 }
-function deZone(a) {
+function deZone(a) {//Removes the timezone offset.
 	return addDates(a,(0-a.getTimezoneOffset())*60);
 }
 
-function setTimeDefaults() {
+function setTimeDefaults() { //Sets times for the fields when page is first loaded.
 	currentDateTime = new Date();
-	if (currentDateTime.getHours()>14) {
+	if (currentDateTime.getHours()>14) {//When it is too late in the day it will presume the next day is the desired day to go planespotting.
 		startDateTime=addDates(currentDateTime,24*60*60);
 		startDateTime.setHours(10);
 		startDateTime.setMinutes(0);
@@ -49,7 +49,7 @@ function setTimeDefaults() {
 	avEndTime.value=deZone(endDateTime).toISOString().slice(0,16);
 }
 
-function validateTime() {
+function validateTime() { //Checks that the start time is before the end time and vice versa
 	console.log(Number(toDateObject(avStartTime.value)));
 	console.log(Number(toDateObject(avEndTime.value)));
 	if (Number(toDateObject(avStartTime.value)) >= Number(toDateObject(avEndTime.value))) {
@@ -59,12 +59,9 @@ function validateTime() {
 	}
 }
 
-function loadFlightData() {
-}
-
 function loadAirportsAvalible() {
 	$.get(
-		"http://airportapi.maxstuff.net",
+		"https://airportapimaxstuffnet.wl.r.appspot.com/", //There, you happy now f**king mixed content errors!
 		function(data) {
 			parsedData=JSON.parse(data);
 			for (i = 0; i<parsedData.length; i++) {
@@ -80,6 +77,29 @@ function loadAirportsAvalible() {
 		}
 	)
 }
+
+function loadFlightData() {
+	$.get(
+		"https://airportapimaxstuffnet.wl.r.appspot.com/?airport="+airportSelect.value,
+		function(data) {
+			console.log(data);
+		},
+	).fail(function (data) {
+			console.log(data);
+		}
+	)
+}
+
+function validateDuration() {
+	if (timeSpentH.value>=1) {
+		timeSpentM.min = -1;
+	}
+	if (timeSpentM.value<0) {
+		timeSpentM.value = 59;
+		timeSpentH.value -= 1;
+	}
+}
+
 
 setTimeDefaults();
 validateTime();
