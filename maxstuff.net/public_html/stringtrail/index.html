@@ -1,0 +1,151 @@
+<!��Main Page www.maxstuff.net/-->
+
+<head>
+  <meta name="google-site-verification" content="yUZ-TRV5HUKh5k8HmpiaNE-pSJEOC1WpkuUcuYgRxqk" />
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-160826511-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-160826511-1');
+</script>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-WDJQQDQ');</script>
+<!-- End Google Tag Manager -->
+  <title>Max's Stuff</title>
+  <style>
+  @import url('https://fonts.googleapis.com/css?family=Comfortaa&display=swap');
+    h1 {
+      color:blue;
+      font-family:"Comfortaa";
+    }
+	h2 {
+		color:gold;
+      font-family:"Comfortaa";
+	}
+    p {
+      color:#525252;
+      font-weight:bold;
+      font-family:"Comfortaa";
+    }
+    li  {
+      font-weight:bold;
+      font-family:"Comfortaa";
+    }
+    body {
+      margin:30px;
+    }
+    a {
+      text-decoration:none;
+	  color:blue
+    }
+  </style>
+  <meta name="description" content="Minecraft Server:Friendsville Season 2			Discord:MaxFire2008#4700			Email:me@maxstuff.net" />
+  <link rel="stylesheet" type="text/css" href="//wpcc.io/lib/1.0.2/cookieconsent.min.css"/><script src="//wpcc.io/lib/1.0.2/cookieconsent.min.js"></script><script>window.addEventListener("load", function(){window.wpcc.init({"border":"thick","corners":"large","colors":{"popup":{"background":"#edfdfa","text":"#000000","border":"#5ec2b6"},"button":{"background":"#5ec2b6","text":"#ffffff"}},"position":"bottom","padding":"small","fontsize":"large","content":{"href":"http://www.maxstuff.net/cookies/"}})});</script></head>
+<body>
+  <!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WDJQQDQ"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+
+
+
+<p id="para">Hello</p>
+
+
+
+<button onclick="getLocation()">Update Location</button>
+
+<!-- Import mapbox.js -->
+<script src='https://api.mapbox.com/mapbox.js/v3.3.0/mapbox.js'></script>
+<link href='https://api.mapbox.com/mapbox.js/v3.3.0/mapbox.css' rel='stylesheet' />
+<!---->
+
+<style>
+  #map { width:90%; height:70%}
+</style>
+<div id='map'></div>
+<script>
+  L.mapbox.accessToken = 'pk.eyJ1IjoibWF4MzI4NzU2MjM4NDUzIiwiYSI6ImNrOWRyYXVkaTA2b3Qzb3Mzc2RodzhrY2UifQ.Xh1oEv7-u6QhOnpQCn5bGA';
+  var map = L.mapbox.map('map')
+      .setView([40, -74.50], 9)
+      .addLayer(L.mapbox.styleLayer('mapbox://styles/mapbox/streets-v11'));
+function updateMap(locationsonmap,currentlocation) {
+  console.log([40, -74.50])
+  console.log(currentlocation)
+  console.log(locationsonmap)
+  map.setView(currentlocation)
+  // create a red polyline from an arrays of LatLng points
+  var polyline = L.polyline(locationsonmap, {color: 'red'}).addTo(map);
+
+  // zoom the map to the polyline
+  map.fitBounds(polyline.getBounds());
+  }
+</script>
+
+
+<script>
+  function setCookie(cname, cvalue, exdays) {
+    var d = new Date();
+    d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+    var expires = "expires="+d.toUTCString();
+    document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+  }
+
+  function getCookie(cname) {
+    var name = cname + "=";
+    var ca = document.cookie.split(';');
+    for(var i = 0; i < ca.length; i++) {
+      var c = ca[i];
+      while (c.charAt(0) == ' ') {
+        c = c.substring(1);
+      }
+      if (c.indexOf(name) == 0) {
+        return c.substring(name.length, c.length);
+      }
+    }
+    return "";
+  }
+
+var x = document.getElementById("para");
+
+function getLocation() {
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(showPosition);
+  } else {
+    para.textContent = "Geolocation is not supported by this browser.";
+  }
+}
+
+function showPosition(position) {
+
+  var cookietmp = getCookie("position")
+  if (cookietmp == "") {
+    cookietmpv = []
+  } else {
+    cookietmpv = JSON.parse(cookietmp)
+  }
+  cookietmpv.push([position.coords.latitude, position.coords.longitude])
+  document.cookie = setCookie("position", JSON.stringify(cookietmpv), 30);
+  updateMap(cookietmpv,[position.coords.latitude, position.coords.longitude])
+}
+</script>
+
+
+
+
+  <br><br>
+  <h1>Contact Me</h1>
+  <p>
+    Email - <a href="mailto:me@maxstuff.net">me@maxstuff.net</a><br>
+    Discord - MaxFire2008#4700<br><br><br>
+	<a href="http://www.maxstuff.net/cookies">Cookie Policy</a><br>
+	<a href="http://www.maxstuff.net/privacy">Privacy Policy</a>
+  </p>
+</body>
