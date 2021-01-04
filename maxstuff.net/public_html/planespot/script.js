@@ -91,16 +91,25 @@ function loadFlightData() {
 }
 
 function validateDuration() {
-	if (timeSpentH.value>=1) {
-		timeSpentM.min = -1;
-	}
-	if (timeSpentM.value<0) {
+	if (Number(timeSpentM.value)<0) {
 		timeSpentM.value = 59;
-		timeSpentH.value -= 1;
+		timeSpentH.value = Number(timeSpentH.value)- 1;
+	}
+	if (Number(timeSpentM.value)>59) {
+		timeSpentM.value = 0
+		timeSpentH.value = Number(timeSpentH.value)+1;
+	}
+	if (Number(timeSpentH.value)>=1) {
+		timeSpentM.min = -1;
+	} else {
+		timeSpentM.min = 0;
 	}
 }
 
+timeSpentH.oninput = validateDuration;
+timeSpentM.oninput = validateDuration;
 
+validateDuration();
 setTimeDefaults();
 validateTime();
 loadAirportsAvalible();
