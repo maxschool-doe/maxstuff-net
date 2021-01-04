@@ -34,7 +34,6 @@ function setTimeDefaults() { //Sets times for the fields when page is first load
 		endDateTime.setMinutes(0);
 		endDateTime.setSeconds(0);
 	} else {
-		console.log("dsfsdafs");
 		startDateTime=addDates(currentDateTime,1*60*60);
 		startDateTime.setSeconds(0);
 		
@@ -129,10 +128,12 @@ function findTimes() {
 		flightCount = 0;
 		arrivalCount = 0;
 		departureCount = 0;
+		earliestTime = flightDataCache[i]["time"];
+		latestTime = flightDataCache[i]["time"]+timeAvalible;
 		aircraftTypes = [];
 		for (j = 0; j < flightDataCache.length-i; j++) {
 			if (flightDataCache[j]["cancelled"] == false) {
-				if (flightDataCache[j]["time"] < flightDataCache[i]["time"]+timeAvalible && startTime <= flightDataCache[j]["time"] && endTime >= flightDataCache[j]["time"]) {
+				if (flightDataCache[j]["time"] < flightDataCache[i]["time"]+timeAvalible && flightDataCache[j]["time"] > flightDataCache[i]["time"] && startTime <= flightDataCache[j]["time"] && endTime >= flightDataCache[j]["time"] && !(flightDataCache[j]["aircraft"]=="143")) {//Javscript if statments suck!
 					flightCount+=1;
 					if (flightDataCache[j]["arrival_departure"] == "a") {
 						arrivalCount += 1;
@@ -146,10 +147,12 @@ function findTimes() {
 			}
 		}
 		spottingTimeScore = Number(arrivalWeight.value)*arrivalCount+Number(departureWeight.value)*departureCount;
-		spottingTimes.push([flightCount,arrivalCount,departureCount,aircraftTypes.length,spottingTimeScore,flightDataCache[i]["time"],flightDataCache[i]["time"]+timeAvalible]);
+		spottingTimes.push([flightCount,arrivalCount,departureCount,aircraftTypes.length,spottingTimeScore,earliestTime,latestTime]);
 	}
 	places = [];
-	spottingTimesSorted = spottingTimes.sort((a, b) => (a[4] < b[4]) ? 1 : (a[4] === b[4]) ? ((a[0] > b[0]) ? 1 : -1) : -1);
+	tableBody.innerHTML = "";
+	spottingTimesSorted = spottingTimes.sort((a, b) => (a[4] < b[4]) ? 1 : (a[4] === b[4]) ? ((a[6]-a[5] > b[6]-b[5]) ? 1 : -1) : -1);
+	//appendedAtLeastOne = false;
 	for (i = 0; i < spottingTimesSorted.length; i++) {
 		places.push(toPlace(i+1)+" "+spottingTimesSorted[i][1]+" "+spottingTimesSorted[i][2]+" "+spottingTimesSorted[i][3])
 		currentTableRowElement = document.createElement("tr");
@@ -161,19 +164,42 @@ function findTimes() {
 		colOne.textContent=spottingTimesSorted[i][1];
 		colTwo.textContent=spottingTimesSorted[i][2];
 		colThree.textContent=spottingTimesSorted[i][3];
-		colFour.textContent=(new Date(spottingTimesSorted[i][5]*1000).toString().slice(0,24));
-		colFive.textContent=(new Date(spottingTimesSorted[i][6]*1000).toString().slice(0,24));
+		if (spottingTimesSorted[i][5] < startTime) {
+			colFour.textContent=(new Date(startTime*1000).toString().slice(0,24));
+		} else {
+			colFour.textContent=(new Date(spottingTimesSorted[i][5]*1000).toString().slice(0,24));
+		}
+		if (spottingTimesSorted[i][6] > endTime) {
+			colFive.textContent=(new Date(endTime*1000).toString().slice(0,24));
+		} else {
+			colFive.textContent=(new Date(spottingTimesSorted[i][6]*1000).toString().slice(0,24));
+		}
 		currentTableRowElement.appendChild(colOne);
 		currentTableRowElement.appendChild(colTwo);
 		currentTableRowElement.appendChild(colThree);
 		currentTableRowElement.appendChild(colFour);
 		currentTableRowElement.appendChild(colFive);
-		if (startTime <= spottingTimesSorted[i][5] && endTime >= spottingTimesSorted[i][6]) {
+		if (spottingTimesSorted[i][0] > 0) {
 			tableBody.appendChild(currentTableRowElement);
 		}
 	}
-	//resultSpan.innerHTML = places.join("<br>");
-	resultTable.style.display=""
+	//console.log(flightDataCache);
+	if (flightDataCache.length == 0) {
+		setInterval(findTimes,500);
+		console.log("Trying again");
+	}
+	nextColor = 0;
+	for (i = 0; i < tableBody.children.length; i++) {
+		if (nextColor == 0) {
+			tableBody.children[i].style.backgroundColor="#d1d1d1";
+			nextColor=1;
+		} else if (nextColor == 1) {
+			tableBody.children[i].style.backgroundColor="#ededed";
+			nextColor=0;
+		}
+	}
+	resultSpan.innerHTML = "";
+	resultTable.style.display="";
 //	return spottingTimes;
 }
 
@@ -192,7 +218,8 @@ getTimes.onclick = function () {
 	if (localStorage.getItem("skipLoad") == "true") {
 		findTimes();
 	} else {
-		WAITTIME = 2000;
+		WAITTIME = 1500;
+		resultTable.style.display="none";
 		resultSpan.textContent = "Loading 0% [----------]";
 		setTimeout(function () {resultSpan.textContent = "Loading 10% [#---------]";},(WAITTIME/10)*1);
 		setTimeout(function () {resultSpan.textContent = "Loading 20% [##--------]";},(WAITTIME/10)*2);
