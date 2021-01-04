@@ -78,11 +78,13 @@ function loadAirportsAvalible() {
 	)
 }
 
+var flightDataCache = [];
+
 function loadFlightData() {
 	$.get(
 		"https://airportapimaxstuffnet.wl.r.appspot.com/?airport="+airportSelect.value,
 		function(data) {
-			console.log(data);
+			flightDataCache = JSON.parse(data);
 		},
 	).fail(function (data) {
 			console.log(data);
@@ -106,6 +108,33 @@ function validateDuration() {
 	}
 }
 
+function toPlace(x) {
+	if (x == 1) {
+		return String(x)+"st";
+	} else if (x == 2) {
+		return String(x)+"nd";
+	} else if (x == 3) {
+		return String(x)+"rd";
+	} else {
+		return String(x)+"th";
+	}
+}
+
+function findTimes() {
+	timeAvalible = ((Number(timeSpentH.value)*60)+Number(timeSpentM.value))*60;
+	for (i = 0; i < flightDataCache.length; i++) {
+		flightCount = 0;
+		arrivalCount = 0;
+		departureCount = 0;
+		aircraftTypes = [];
+		for (j = 0; j < flightDataCache.length-i; j++) {
+			if (flightDataCache[i]["
+		}
+	}
+	places = ["a"];
+	resultSpan.innerHTML = places.join("<br>");
+}
+
 timeSpentH.oninput = validateDuration;
 timeSpentM.oninput = validateDuration;
 
@@ -114,7 +143,31 @@ setTimeDefaults();
 validateTime();
 loadAirportsAvalible();
 
-airportSelect.onchange = function () {console.log("onchange")};
+getTimes.onclick = function () {
+	//Hardcore dev? run `localStorage.setItem("skipLoad",true)`
+	//https://www.youtube.com/watch?v=O6ZQ9r8a3iw
+	//Why Some Apps Are Intentionally Slow - Cheddar Explains
+	if (localStorage.getItem("skipLoad") == "true") {
+		findTimes();
+	} else {
+		WAITTIME = 2000;
+		resultSpan.textContent = "Loading 0% [----------]";
+		setTimeout(function () {resultSpan.textContent = "Loading 10% [#---------]";},(WAITTIME/10)*1);
+		setTimeout(function () {resultSpan.textContent = "Loading 20% [##--------]";},(WAITTIME/10)*2);
+		setTimeout(function () {resultSpan.textContent = "Loading 30% [###-------]";},(WAITTIME/10)*3);
+		setTimeout(function () {resultSpan.textContent = "Loading 40% [####------]";},(WAITTIME/10)*4);
+		setTimeout(function () {resultSpan.textContent = "Loading 50% [#####-----]";},(WAITTIME/10)*5);
+		setTimeout(function () {resultSpan.textContent = "Loading 60% [######----]";},(WAITTIME/10)*6);
+		setTimeout(function () {resultSpan.textContent = "Loading 70% [#######---]";},(WAITTIME/10)*7);
+		setTimeout(function () {resultSpan.textContent = "Loading 80% [########--]";},(WAITTIME/10)*8);
+		setTimeout(function () {resultSpan.textContent = "Loading 90% [#########-]";},(WAITTIME/10)*9);
+		setTimeout(function () {resultSpan.textContent = "Loading 100% [##########]";},(WAITTIME/10)*10);
+		setTimeout(findTimes,(WAITTIME/10)*11);
+	}
+}
+
+airportSelect.onchange = loadFlightData;
+//airportSelect.onchange = function () {console.log("onchange")};
 
 
 
