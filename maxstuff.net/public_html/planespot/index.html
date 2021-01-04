@@ -42,7 +42,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 		Airport: <select id="airportSelect"></select><br>
 		Availability Start Time: <input id="avStartTime" onchange="validateTime();" type="datetime-local"><br>
 		Availability End Time: <input id="avEndTime" onchange="validateTime();" type="datetime-local"><br>
-		Time Spent Planespotting: <input type="value" id="timeSpentH" type="value" min=0 value=1>:<input type="value" id="timeSpentM" type="value" min=0 value=0>
+		Time Spent Planespotting: <input type="number" id="timeSpentH" min=0 value=1 style="width:10vw">:<input type="number" id="timeSpentM" min=0 value=0 max=60>
 		<br><br>
 		<span id="resultSpan"></span>
 	</p>
