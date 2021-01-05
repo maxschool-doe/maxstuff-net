@@ -42,9 +42,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 		Airport: <select id="airportSelect"></select><br>
 		Availability Start Time: <input id="avStartTime" onchange="validateTime();" type="datetime-local"><br>
 		Availability End Time: <input id="avEndTime" onchange="validateTime();" type="datetime-local"><br>
-		Time Spent Planespotting: <input type="number" id="timeSpentH" min=0 value=1 style="width:10vw">:<input type="number" id="timeSpentM" min=0 value=0 max=60><br>
-		Departure Weight: <input type="number" id="departureWeight" min=0 value=0.5 step=0.1 style="width:10vw"><br>
-		Arrival Weight: <input type="number" id="arrivalWeight" min=0 value=1 step=0.1 style="width:10vw">
+		Time Spent Planespotting: <input type="number" id="timeSpentH" min=0 value=1 style="width:5vw">:<input type="number" id="timeSpentM" min=0 value=0 max=60 style="width:5vw"><br>
+		Departure Importance: <input type="number" id="departureWeight" min=0 value=1 step=0.1 style="width:10vw"><br>
+		Arrival Importance: <input type="number" id="arrivalWeight" min=0 value=1 step=0.1 style="width:10vw">
 		<br><button id="getTimes">Get times!</button><br>
 		<span id="resultSpan"></span>
 		<table id="resultTable" style="display:none;">

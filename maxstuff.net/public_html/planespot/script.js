@@ -28,7 +28,7 @@ function deZone(a) {//Removes the timezone offset.
 
 function setTimeDefaults() { //Sets times for the fields when page is first loaded.
 	currentDateTime = new Date();
-	if (currentDateTime.getHours()>14) {//When it is too late in the day it will presume the next day is the desired day to go planespotting.
+	if (currentDateTime.getHours()>13) {//When it is too late in the day it will presume the next day is the desired day to go planespotting.
 		startDateTime=addDates(currentDateTime,24*60*60);
 		startDateTime.setHours(10);
 		startDateTime.setMinutes(0);
@@ -39,7 +39,7 @@ function setTimeDefaults() { //Sets times for the fields when page is first load
 		endDateTime.setMinutes(0);
 		endDateTime.setSeconds(0);
 	} else {
-		startDateTime=addDates(currentDateTime,1*60*60);
+		startDateTime=roundTime(addDates(currentDateTime,1*60*60),900);
 		startDateTime.setSeconds(0);
 		
 		endDateTime=roundTime(currentDateTime,900);
