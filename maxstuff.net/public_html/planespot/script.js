@@ -85,6 +85,7 @@ function loadAirportsAvalible() {
 var flightDataCache = [];
 
 function loadFlightData() {
+	flightDataCache = [];
 	$.get(
 		airportapiURL+"?airport="+airportSelect.value,
 		function(data) {
@@ -196,8 +197,11 @@ function findTimes() {
 	}
 	//console.log(flightDataCache);
 	if (flightDataCache.length == 0) {
-		setInterval(findTimes,500);
+		setInterval(findTimes,5000);
 		console.log("Trying again");
+		waitElement = document.createElement("p");
+		waitElement.textContent="We are prepearing the cache system please wait 15 seconds.";
+		tableBody.appendChild(waitElement);
 	}
 	nextColor = 0;
 	for (i = 0; i < tableBody.children.length; i++) {
@@ -209,6 +213,7 @@ function findTimes() {
 			nextColor=0;
 		}
 	}
+	resultSpan.style.display = "none";
 	resultSpan.innerHTML = "";
 	resultTable.style.display="";
 //	return spottingTimes;
@@ -230,6 +235,8 @@ getTimes.onclick = function () {
 		findTimes();
 	} else {
 		WAITTIME = 1500;
+		resultSpan.style.display = "";
+		tableBody.innerHTML="";
 		resultTable.style.display="none";
 		resultSpan.textContent = "Loading 0% [----------]";
 		setTimeout(function () {resultSpan.textContent = "Loading 10% [#---------]";},(WAITTIME/10)*1);
@@ -242,6 +249,7 @@ getTimes.onclick = function () {
 		setTimeout(function () {resultSpan.textContent = "Loading 80% [########--]";},(WAITTIME/10)*8);
 		setTimeout(function () {resultSpan.textContent = "Loading 90% [#########-]";},(WAITTIME/10)*9);
 		setTimeout(function () {resultSpan.textContent = "Loading 100% [##########]";},(WAITTIME/10)*10);
+		//setTimeout(function () {resultSpan.textContent = "This is embarrasing! Our fake load time is shorter then our actual load time. Just wait for 10 seconds about.";},(WAITTIME/10)*12);
 		setTimeout(findTimes,(WAITTIME/10)*11);
 	}
 }
