@@ -1,0 +1,56 @@
+<!--Plane Spot www.maxstuff.net/planespot-->
+
+<head>
+  <title>Plane Spot</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <link rel="icon" type="image/icon type" href="/favicon/plane-spot.ico">
+  <link rel="apple-touch-icon" sizes="180x180" href="/favicon/plane-spot.png"/>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="/main.css">
+  <meta name="description" content="Know the best time to go planespotting!" />
+  </head>
+<body>
+  <h1>
+    Plane Spot
+  </h1>
+  <p>
+		Find the best times to go planespotting!
+	</p>
+	<p>
+		<span style="color:red;display:none;" id="timewarn">Please pick an end time <b>after</b> the start time.<br><br></span>
+		Airport: <select id="airportSelect"></select><br>
+		Availability Start Time: <input id="avStartTime" onchange="validateTime();" type="datetime-local"><br>
+		Availability End Time: <input id="avEndTime" onchange="validateTime();" type="datetime-local"><br>
+		Time Spent Planespotting: <input type="number" id="timeSpentH" min=0 value=1 style="width:5vw">:<input type="number" id="timeSpentM" min=0 value=0 max=60 style="width:5vw"><br>
+		Departure Importance: <input type="number" id="departureWeight" min=0 value=1 step=0.1 style="width:10vw"><br>
+		Arrival Importance: <input type="number" id="arrivalWeight" min=0 value=1 step=0.1 style="width:10vw">
+		<br><button id="getTimes">Get times!</button><br>
+		<span id="resultSpan"></span>
+		<table id="resultTable" style="display:none;">
+			<thead>
+				<tr>
+					<td>Arrivals</td>
+					<td>Departures</td>
+					<td>Aircraft Types</td>
+					<td>Start Time</td>
+					<td>End Time</td>
+				</tr>
+			</thead>
+			<tbody id="tableBody">
+				
+			</tbody>
+		</table>
+	</p>
+	<p>
+		Airport you want not here? You can check if it will be added at <a href="https://github.com/maxfire2008/airportapimaxstuffnet/issues">https://github.com/maxfire2008/airportapimaxstuffnet/issues</a> or you can request it be added at <a href="https://github.com/maxfire2008/airportapimaxstuffnet/issues/new?assignees=&labels=&template=add-airport-request.md&title=Add+airport+with+ICAO+%2A%2A%2A%2A">https://github.com/maxfire2008/airportapimaxstuffnet/issues/new?assignees=&labels=&template=add-airport-request.md&title=Add+airport+with+ICAO+%2A%2A%2A%2A</a>
+		which requires a GitHub.com account.
+	</p>
+  <h1>Contact Me</h1>
+  <p>
+    Email - <a href="mailto:me@maxstuff.net">me@maxstuff.net</a><br>
+    Discord - MaxFire2008#4700<br><br><br>
+	<a href="http://www.maxstuff.net/cookies">Cookie Policy</a><br>
+	<a href="http://www.maxstuff.net/privacy">Privacy Policy</a>
+  </p>
+	<script src="script.js"></script>
+</body>
