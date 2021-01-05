@@ -133,7 +133,7 @@ function findTimes() {
 		aircraftTypes = [];
 		for (j = 0; j < flightDataCache.length-i; j++) {
 			if (flightDataCache[j]["cancelled"] == false) {
-				if (flightDataCache[j]["est_time"] < flightDataCache[i]["est_time"]+timeAvalible && flightDataCache[j]["est_time"] > flightDataCache[i]["est_time"] && startTime <= flightDataCache[j]["est_time"] && endTime >= flightDataCache[j]["est_time"] && !(flightDataCache[j]["aircraft"]=="143")) {//Javscript if statments suck!
+				if (flightDataCache[j]["est_time"] < flightDataCache[i]["est_time"]+timeAvalible && flightDataCache[j]["est_time"] > flightDataCache[i]["est_time"] && startTime <= flightDataCache[j]["est_time"] && endTime >= flightDataCache[j]["est_time"]/* && !(flightDataCache[j]["aircraft"]=="143")*/) {//Javscript if statments suck!
 					flightCount+=1;
 					if (flightDataCache[j]["arrival_departure"] == "a") {
 						arrivalCount += 1;
