@@ -1,3 +1,8 @@
+var airportapiURL = "https://airportapimaxstuffnet.wl.r.appspot.com/";
+if (localStorage.getItem("airportapiURL")) {
+	var airportapiURL = localStorage.getItem("airportapiURL");
+}
+
 function addDates(a,b) {
 	if (a.constructor == Date) {
 		apoch = Number(new Date(a))/1000;
@@ -60,7 +65,7 @@ function validateTime() { //Checks that the start time is before the end time an
 
 function loadAirportsAvalible() {
 	$.get(
-		"https://airportapimaxstuffnet.wl.r.appspot.com/", //There, you happy now f**king mixed content errors!
+		airportapiURL, //There, you happy now f**king mixed content errors!
 		function(data) {
 			parsedData=JSON.parse(data);
 			for (i = 0; i<parsedData.length; i++) {
@@ -81,7 +86,7 @@ var flightDataCache = [];
 
 function loadFlightData() {
 	$.get(
-		"https://airportapimaxstuffnet.wl.r.appspot.com/?airport="+airportSelect.value,
+		airportapiURL+"?airport="+airportSelect.value,
 		function(data) {
 			flightDataCache = JSON.parse(data);
 		},
