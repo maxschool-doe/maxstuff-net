@@ -1,3 +1,7 @@
+var airportapiURL = "https://airportapimaxstuffnet.wl.r.appspot.com/";
+if (localStorage.getItem("airportapiURL")) {
+	var airportapiURL = localStorage.getItem("airportapiURL");
+}
 function addDates(a,b) {
 	if (a.constructor == Date) {
 		apoch = Number(new Date(a))/1000;
@@ -23,7 +27,7 @@ function deZone(a) {//Removes the timezone offset.
 
 function setTimeDefaults() { //Sets times for the fields when page is first loaded.
 	currentDateTime = new Date();
-	if (currentDateTime.getHours()>14) {//When it is too late in the day it will presume the next day is the desired day to go planespotting.
+	if (currentDateTime.getHours()>13) {//When it is too late in the day it will presume the next day is the desired day to go planespotting.
 		startDateTime=addDates(currentDateTime,24*60*60);
 		startDateTime.setHours(10);
 		startDateTime.setMinutes(0);
@@ -34,7 +38,7 @@ function setTimeDefaults() { //Sets times for the fields when page is first load
 		endDateTime.setMinutes(0);
 		endDateTime.setSeconds(0);
 	} else {
-		startDateTime=addDates(currentDateTime,1*60*60);
+		startDateTime=roundTime(addDates(currentDateTime,1*60*60),900);
 		startDateTime.setSeconds(0);
 		
 		endDateTime=roundTime(currentDateTime,900);
@@ -60,7 +64,7 @@ function validateTime() { //Checks that the start time is before the end time an
 
 function loadAirportsAvalible() {
 	$.get(
-		"https://airportapimaxstuffnet.wl.r.appspot.com/", //There, you happy now f**king mixed content errors!
+		airportapiURL, //There, you happy now f**king mixed content errors!
 		function(data) {
 			parsedData=JSON.parse(data);
 			for (i = 0; i<parsedData.length; i++) {
@@ -80,8 +84,10 @@ function loadAirportsAvalible() {
 var flightDataCache = [];
 
 function loadFlightData() {
+	flightDataCache = [];
+	resultTable.style.display="none";
 	$.get(
-		"https://airportapimaxstuffnet.wl.r.appspot.com/?airport="+airportSelect.value,
+		airportapiURL+"?airport="+airportSelect.value,
 		function(data) {
 			flightDataCache = JSON.parse(data);
 		},
@@ -133,7 +139,7 @@ function findTimes() {
 		aircraftTypes = [];
 		for (j = 0; j < flightDataCache.length-i; j++) {
 			if (flightDataCache[j]["cancelled"] == false) {
-				if (flightDataCache[j]["est_time"] < flightDataCache[i]["est_time"]+timeAvalible && flightDataCache[j]["est_time"] > flightDataCache[i]["est_time"] && startTime <= flightDataCache[j]["est_time"] && endTime >= flightDataCache[j]["est_time"] && !(flightDataCache[j]["aircraft"]=="143")) {//Javscript if statments suck!
+				if (flightDataCache[j]["est_time"] < flightDataCache[i]["est_time"]+timeAvalible && flightDataCache[j]["est_time"] > flightDataCache[i]["est_time"] && startTime <= flightDataCache[j]["est_time"] && endTime >= flightDataCache[j]["est_time"]/* && !(flightDataCache[j]["aircraft"]=="143")*/) {//Javscript if statments suck!
 					flightCount+=1;
 					if (flightDataCache[j]["arrival_departure"] == "a") {
 						arrivalCount += 1;
@@ -191,8 +197,11 @@ function findTimes() {
 	}
 	//console.log(flightDataCache);
 	if (flightDataCache.length == 0) {
-		setInterval(findTimes,500);
+		setTimeout(findTimes,500);
 		console.log("Trying again");
+		waitElement = document.createElement("p");
+		waitElement.textContent="We are prepearing the cache system please wait 15 seconds.";
+		tableBody.appendChild(waitElement);
 	}
 	nextColor = 0;
 	for (i = 0; i < tableBody.children.length; i++) {
@@ -204,6 +213,7 @@ function findTimes() {
 			nextColor=0;
 		}
 	}
+	resultSpan.style.display = "none";
 	resultSpan.innerHTML = "";
 	resultTable.style.display="";
 //	return spottingTimes;
@@ -225,6 +235,8 @@ getTimes.onclick = function () {
 		findTimes();
 	} else {
 		WAITTIME = 1500;
+		resultSpan.style.display = "";
+		tableBody.innerHTML="";
 		resultTable.style.display="none";
 		resultSpan.textContent = "Loading 0% [----------]";
 		setTimeout(function () {resultSpan.textContent = "Loading 10% [#---------]";},(WAITTIME/10)*1);
@@ -237,6 +249,7 @@ getTimes.onclick = function () {
 		setTimeout(function () {resultSpan.textContent = "Loading 80% [########--]";},(WAITTIME/10)*8);
 		setTimeout(function () {resultSpan.textContent = "Loading 90% [#########-]";},(WAITTIME/10)*9);
 		setTimeout(function () {resultSpan.textContent = "Loading 100% [##########]";},(WAITTIME/10)*10);
+		//setTimeout(function () {resultSpan.textContent = "This is embarrasing! Our fake load time is shorter then our actual load time. Just wait for 10 seconds about.";},(WAITTIME/10)*12);
 		setTimeout(findTimes,(WAITTIME/10)*11);
 	}
 }
