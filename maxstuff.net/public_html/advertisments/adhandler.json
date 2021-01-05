@@ -1,0 +1,32 @@
+function loadData (callback) {
+	var xhttp = new XMLHttpRequest();
+	xhttp.onreadystatechange = function () {
+		if (this.readyState == 4 && this.status == 200) {
+			callback(this.responseText);
+		}
+	};
+	xhttp.open("GET", "//"+document.domain+"/advertisments/ads.json", true);
+	xhttp.send();
+}
+
+function setAdvertisments () {
+	loadData(function (adsJSON) {
+	adsdata = JSON.parse(adsJSON.toString());
+	keys = Object.keys(adsdata)
+	for (let i = 0; i < keys.length; i++) {
+		documentelement = document.getElementById(keys[i])
+		if (documentelement) {
+			/*console.log(documentelement);
+			*/documentelement.innerHTML = '';
+			var image = document.createElement("img");
+			image.src = "//"+document.domain+adsdata[keys[i]][0];
+			image.style.maxWidth = adsdata[keys[i]][1];
+			image.style.maxHeight = adsdata[keys[i]][2];
+			var anchor = document.createElement("a");
+			anchor.href = adsdata[keys[i]][3];
+			anchor.appendChild(image);
+			documentelement.appendChild(anchor);
+		}
+	}
+	})
+}
