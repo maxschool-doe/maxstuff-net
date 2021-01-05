@@ -86,6 +86,7 @@ var flightDataCache = [];
 
 function loadFlightData() {
 	flightDataCache = [];
+	resultTable.style.display="none";
 	$.get(
 		airportapiURL+"?airport="+airportSelect.value,
 		function(data) {
