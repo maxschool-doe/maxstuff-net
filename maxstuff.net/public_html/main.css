@@ -1,0 +1,36 @@
+/*<link rel="stylesheet" href="/main.css">*/
+@import url('https://fonts.googleapis.com/css?family=Comfortaa&display=swap');
+h1 {
+  color:blue;
+  font-family:"Comfortaa";
+}
+h2 {
+	color:gold;
+  font-family:"Comfortaa";
+}
+p {
+  color:#262626;
+  font-weight:bold;
+  font-family:"Comfortaa";
+}
+li  {
+  font-weight:bold;
+  font-family:"Comfortaa";
+}
+body {
+  margin:30px;
+}
+a {
+  text-decoration:none;
+	color:blue
+}
+thead {
+	background-color: lightblue;
+}
+table {
+	border-collapse: collapse;
+}
+td {
+	padding: 5px;
+	border: 1px solid blue;
+}

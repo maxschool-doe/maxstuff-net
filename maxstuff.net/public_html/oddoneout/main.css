@@ -1,0 +1,41 @@
+* { box-sizing: border-box; }
+
+div > button {
+  display: inline-block;
+  font-size: 50px;
+  padding-bottom: 10px;
+  padding-left: 10px;
+  padding-right: 10px;
+  border-radius: 20px;
+  background-color: grey;
+  margin: 10px;
+}
+
+.hint {
+  font-size: 24px;
+  font-family: "Lexend Deca";
+  font-weight: bold;
+}
+
+body {
+  margin: 10px;
+}
+
+#congratulationsDiv > p {
+  font-size: 24px;
+  font-family: "Lexend Deca";
+  font-weight: bold;
+}
+h1 {
+  font-family: "Lexend Deca";
+}
+
+.hidden {
+  display: none;
+}
+
+.wrong {
+  color: transparent;
+  text-shadow: 0 0 0 blue;
+  background-color: red;
+}

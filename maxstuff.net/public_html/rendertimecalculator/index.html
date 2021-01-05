@@ -1,0 +1,60 @@
+﻿<!--Main Page www.maxstuff.net/rendertimecalculator-->
+
+<head>
+  <title>Render Time Calculator</title>
+	<link rel="stylesheet" href="/main.css">
+	input {
+		text-align: right;
+		width: 5%;
+	}
+  </style>
+  </head>
+<body>
+  <h1>
+	Render Time Calculator
+</h1>
+
+<p>
+	<!--<label for="currentdevice">Current Device</label>
+	<select name="currentdevice" id="currentdeviceselect"></select>
+	<br>
+	<label for="calculateddevice">Calculated Device</label>
+	<select name="calculateddevice" id="calculateddeviceselect"></select>
+	<br>-->
+	A render with <select id="currentdeviceselect"></select> takes <input type='number' id="currentdeviceminutes" value="0" min=0> mins <input type='number' id="currentdeviceseconds" value="0" min=0 max=59> secs.
+	<br>
+	With <select id="calculateddeviceselect"></select> it will take <span id='calculateddevicemins'>0</span> mins <span id='calculateddevicesecs'>0</span> secs.
+	<br><br>
+	<input type='number' id='longRenderHrs' value='0' min=0> hrs <input type='number' id='longRenderMins' value='0' min=0 max=59> mins <input type='number' id='longRenderSecs' value='1' min=0 max=59> secs at <input type='number' id='FPS' value='24' min=0> FPS would take,
+	<br>
+	<span id="daysTaken">0</span> Days
+	<br>
+	<span id="hoursTaken">0</span> Hours
+	<br>
+	<span id="minutesTaken">0</span> Minutes
+	<br>
+	<span id="secondsTaken">0</span> Seconds
+	<br>
+	to render.
+	<!--
+	<br><br>
+	Data Source:
+	<select id="dataSource">
+		<!--NEWSOURCESHERE--><!--
+		<option value="SHEEPIT">SheepIt!</option>
+		<option value="LTT_BMW">Linus Tech Tips - BMW</option>
+	</select>-->
+	<br>
+	Please note this is an estimate only and is based off the percentages listed at <a href="https://www.sheepit-renderfarm.com/machines.php#gpus-nvidia">https://www.sheepit-renderfarm.com/machines.php#gpus-nvidia</a>.
+</p>
+  
+  <br><br>
+  <script src="script.js"></script>
+  <h1>Contact Me</h1>
+  <p>
+    Email - <a href="mailto:me@maxstuff.net">me@maxstuff.net</a><br>
+    Discord - MaxFire2008#4700<br><br><br>
+	<a href="http://www.maxstuff.net/cookies">Cookie Policy</a><br>
+	<a href="http://www.maxstuff.net/privacy">Privacy Policy</a>
+  </p>
+</body>
