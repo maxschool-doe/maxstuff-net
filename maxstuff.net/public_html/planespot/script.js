@@ -2,7 +2,6 @@ var airportapiURL = "https://airportapimaxstuffnet.wl.r.appspot.com/";
 if (localStorage.getItem("airportapiURL")) {
 	var airportapiURL = localStorage.getItem("airportapiURL");
 }
-
 function addDates(a,b) {
 	if (a.constructor == Date) {
 		apoch = Number(new Date(a))/1000;
