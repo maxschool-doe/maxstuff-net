@@ -198,7 +198,7 @@ function findTimes() {
 	}
 	//console.log(flightDataCache);
 	if (flightDataCache.length == 0) {
-		setInterval(findTimes,5000);
+		setInterval(findTimes,500);
 		console.log("Trying again");
 		waitElement = document.createElement("p");
 		waitElement.textContent="We are prepearing the cache system please wait 15 seconds.";
