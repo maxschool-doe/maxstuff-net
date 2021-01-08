@@ -201,7 +201,7 @@ function findTimes() {
 		setTimeout(findTimes,500);
 		console.log("Trying again");
 		waitElement = document.createElement("p");
-		waitElement.textContent="We are prepearing the cache system please wait 15 seconds.";
+		waitElement.textContent="We are prepearing the cache system please wait 30 seconds.";
 		tableBody.appendChild(waitElement);
 	}
 	nextColor = 0;
