@@ -5,3 +5,7 @@
 	background-color: #ffffdd;
 	border-radius: 2.5vmin;
 }
+#textInput {
+	width: 95vw;
+	height: 10vh;
+}
