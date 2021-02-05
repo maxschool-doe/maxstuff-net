@@ -1,0 +1,7 @@
+.saveOpenButton {
+	border: 0.25vmin black solid;
+	margin: 0.5vmin;
+	padding: 0.5vmin;
+	background-color: #ffffdd;
+	border-radius: 2.5vmin;
+}
