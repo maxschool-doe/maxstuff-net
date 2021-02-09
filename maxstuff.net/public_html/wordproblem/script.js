@@ -1,9 +1,15 @@
 var variables = [];
+
+function removeElement(elementId) {
+    var element = document. getElementById(elementId);
+    element.parentNode.removeChild(element);
+}
+
 function download(text, name, type) {
-  var a = document.getElementById("saveButton");
-  var file = new Blob([text], {type: type});
-  a.href = URL.createObjectURL(file);
-  a.download = name;
+    var a = document.getElementById("saveButton");
+    var file = new Blob([text], {type: type});
+    a.href = URL.createObjectURL(file);
+    a.download = name;
 }
 
 function setSaveButton() {
@@ -15,8 +21,10 @@ function setSaveButton() {
 }
 
 function variablesToHTML() {
+    variableTableBody = "";
 	for (var i = 0; i < variables.length; i++) {
-		newRow
+		newRow = document.createElement("tr");
+        nameArea
 	}
 }
 
