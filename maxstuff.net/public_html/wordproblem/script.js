@@ -17,18 +17,16 @@ function setSaveButton() {
 	if (!filename.length > 0) {
 		filename = "WordProblem1";
 	}
-	download(JSON.stringify({"text":textInput.value,"variables":variables}), filename+'.wps', 'text/plain');
+	download(JSON.stringify({"text":textInput.value,"variables":variables,"answer":answerFormulaInput.value}), filename+'.wps', 'text/plain');
 }
 
-function variablesToHTML() {
-    variableTableBody = "";
-	for (var i = 0; i < variables.length; i++) {
-		newRow = document.createElement("tr");
-        nameArea
-	}
+function newVariable() {
+    
 }
 
 textInput.oninput = setSaveButton;
+answerFormulaInput.oninput = setSaveButton;
+addBlankVariable.onclick = setSaveButton;
 setSaveButton();
 variablesToHTML();
 
