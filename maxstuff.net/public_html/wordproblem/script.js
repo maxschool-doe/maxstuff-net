@@ -1,4 +1,5 @@
-var variables = [];
+var variables = {};
+var nextVariableNumber = 0;
 
 function removeElement(elementId) {
     var element = document.getElementById(elementId);
@@ -26,16 +27,35 @@ function newVariable() {
     typeCell = document.createElement("td");
     minCell = document.createElement("td");
     maxCell = document.createElement("td");
+    formulaCell = document.createElement("td");
+    //Code Here
+    newTR.id = "row"+nextVariableNumber;
+    nameCell.id = "nameCell"+nextVariableNumber;
+    typeCell.id = "typeCell"+nextVariableNumber;
+    minCell.id = "minCell"+nextVariableNumber;
+    maxCell.id = "maxCell"+nextVariableNumber;
+    formulaCell.id = "formulaCell"+nextVariableNumber;
+    variables[nextVariableNumber] = {"type":"number","min":0,"max":50,"formula":""};
+    nameCell.textContent = variables[nextVariableNumber]["type"]+nextVariableNumber;
+    typeInput = document.createElement("");
+    ///////////
     newTR.appendChild(nameCell);
     newTR.appendChild(typeCell);
     newTR.appendChild(minCell);
     newTR.appendChild(maxCell);
+    newTR.appendChild(formulaCell);
     variableTableBody.appendChild(newTR);
+    nextVariableNumber+=1;
+}
+
+function updateAll() {
+    for (x in variables) {
+    }
 }
 
 textInput.oninput = setSaveButton;
 answerFormulaInput.oninput = setSaveButton;
-addBlankVariable.onclick = setSaveButton;
+addBlankVariable.onclick = function () { setSaveButton(); newVariable(); };
 setSaveButton();
 
 
