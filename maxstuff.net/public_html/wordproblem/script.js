@@ -1,7 +1,7 @@
 var variables = [];
 
 function removeElement(elementId) {
-    var element = document. getElementById(elementId);
+    var element = document.getElementById(elementId);
     element.parentNode.removeChild(element);
 }
 
@@ -21,13 +21,21 @@ function setSaveButton() {
 }
 
 function newVariable() {
-    
+    newTR = document.createElement("tr");
+    nameCell = document.createElement("td");
+    typeCell = document.createElement("td");
+    minCell = document.createElement("td");
+    maxCell = document.createElement("td");
+    newTR.appendChild(nameCell);
+    newTR.appendChild(typeCell);
+    newTR.appendChild(minCell);
+    newTR.appendChild(maxCell);
+    variableTableBody.appendChild(newTR);
 }
 
 textInput.oninput = setSaveButton;
 answerFormulaInput.oninput = setSaveButton;
 addBlankVariable.onclick = setSaveButton;
 setSaveButton();
-variablesToHTML();
 
 
