@@ -37,7 +37,14 @@ function newVariable() {
     formulaCell.id = "formulaCell"+nextVariableNumber;
     variables[nextVariableNumber] = {"type":"number","min":0,"max":50,"formula":""};
     nameCell.textContent = variables[nextVariableNumber]["type"]+nextVariableNumber;
-    typeInput = document.createElement("");
+    typeInput = document.createElement("select");
+    numberOption = document.createElement("option");
+    numberOption.textContent="Random Number";
+    typeInput.appendChild(numberOption);
+    nameOption = document.createElement("option");
+    nameOption.textContent="Random Name";
+    typeInput.appendChild(nameOption);
+    typeCell.appendChild(typeInput);
     ///////////
     newTR.appendChild(nameCell);
     newTR.appendChild(typeCell);
@@ -46,16 +53,12 @@ function newVariable() {
     newTR.appendChild(formulaCell);
     variableTableBody.appendChild(newTR);
     nextVariableNumber+=1;
-}
-
-function updateAll() {
-    for (x in variables) {
-    }
+    setSaveButton();
 }
 
 textInput.oninput = setSaveButton;
 answerFormulaInput.oninput = setSaveButton;
-addBlankVariable.onclick = function () { setSaveButton(); newVariable(); };
+addBlankVariable.onclick = newVariable;
 setSaveButton();
 
 
