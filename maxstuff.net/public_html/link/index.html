@@ -1,0 +1,75 @@
+<!--Links Page www.maxstuff.net/link-->
+
+<head>
+  <title>Links</title>
+  <link rel="icon" type="image/icon type" href="favicon/main.ico">
+  <link rel="apple-touch-icon" sizes="180x180" href="favicon/main.png"/>
+  <link rel="stylesheet" href="/main.css">
+  <meta name="description" content="A website full of random thingies" />
+</head>
+<body>
+  <h1>
+    Max's Links
+  </h1>
+  <p>
+    Links to random webpages that don't deserve a spot on the front page.
+  </p>
+  <ul id="listOfLinks">
+    <!--
+    <li>
+      <a style="color:black" href="http://www.maxstuff.net/">Site Name</a>
+    </li>
+    -->
+  </ul>
+    <br>
+  <!-- ShareThis BEGIN --><div class="sharethis-inline-share-buttons"></div><!-- ShareThis END -->
+  <h1>Contact Me</h1>
+  <p>
+	  Email - <span>me<span>(at</span>)maxstuff</span>(<span>dot)net</span> <sup><span style="color:blue" title="This is used to prevent automated bots from getting my email.">[?]</span></sup><br>
+    Discord - MaxFire2008#4700<br><br><br>
+	<a href="http://www.maxstuff.net/cookies">Cookie Policy</a><br>
+	<a href="http://www.maxstuff.net/privacy">Privacy Policy</a>
+  </p>
+  <script>
+	searchLookup = {
+		"?gravitycartimes": ["https://maxstuff.net/files/timesforgravcars.txt","View Gravity Car Results (Select all then paste into top left cell in spreadsheet)"],
+	};
+	function showSearch() {
+		if (window.location.search.toLocaleLowerCase() in searchLookup) {
+            urlToDirectTo = searchLookup[window.location.search.toLocaleLowerCase()][0];
+            window.location=urlToDirectTo;
+            document.body.innerHTML = "Redirecting to <a href='"+urlToDirectTo+"'>"+urlToDirectTo+"</a>";
+		}
+	}
+	function showSearchIndex() {
+		searchesToShow = {};
+        searchesToShowTitles = {};
+		for (i in searchLookup) {
+			if (searchLookup[i][0] in searchesToShow) {
+				searchesToShow[searchLookup[i][0]].push(i);
+			} else {
+				searchesToShow[searchLookup[i][0]] = [];
+				searchesToShow[searchLookup[i][0]].push(i);
+			}
+		}
+		console.log("%cSearches for quick linking","font-size:200%");
+		console.log("%cCapitalisation does not matter","font-size:100%");
+		for (i in searchesToShow) {
+			console.log("%c"+i+": "+"%c"+searchesToShow[i].join(" "),"color:#000","color:#00f");
+		}
+	}
+    function listItems() {
+        for (i in searchLookup) {
+            newA = document.createElement("a");
+            newA.href = "/link/"+i;
+            newA.textContent = searchLookup[i][1];
+			newLi = document.createElement("li");
+            newLi.appendChild(newA);
+            document.getElementById("listOfLinks").appendChild(newLi);
+        }
+    }
+    listItems();
+	showSearch();
+	showSearchIndex();
+  </script>
+</body>
