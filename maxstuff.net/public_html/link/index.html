@@ -39,7 +39,9 @@
             urlToDirectTo = searchLookup[window.location.search.toLocaleLowerCase()][0];
             window.location=urlToDirectTo;
             document.body.innerHTML = "Redirecting to <a href='"+urlToDirectTo+"'>"+urlToDirectTo+"</a>";
-		}
+		} else if (window.location.search != "") {
+            document.body.innerHTML = "Error, you must have spelt something wrong or this link does not exist.";
+        }
 	}
 	function showSearchIndex() {
 		searchesToShow = {};
