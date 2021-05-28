@@ -32,7 +32,7 @@
   </p>
   <script>
 	searchLookup = {
-		"?gravitycartimes": ["https://maxstuff.net/files/timesforgravitycars.txt","View Gravity Car Results (Select all then paste into top left cell in spreadsheet)"],
+		"?gravitycartimes": ["https://maxstuff.net/files/timesforgravitycars.txt","View Gravity Car Results (Select all then paste into top left cell in spreadsheet)",true],
 	};
 	function showSearch() {
 		if (window.location.search.toLocaleLowerCase() in searchLookup) {
@@ -60,12 +60,14 @@
 	}
     function listItems() {
         for (i in searchLookup) {
-            newA = document.createElement("a");
-            newA.href = "/link/"+i;
-            newA.textContent = searchLookup[i][1];
-			newLi = document.createElement("li");
-            newLi.appendChild(newA);
-            document.getElementById("listOfLinks").appendChild(newLi);
+            if (searchLookup[i][2]){
+                newA = document.createElement("a");
+                newA.href = "/link/"+i;
+                newA.textContent = searchLookup[i][1];
+                newLi = document.createElement("li");
+                newLi.appendChild(newA);
+                document.getElementById("listOfLinks").appendChild(newLi);
+            }
         }
     }
     listItems();
