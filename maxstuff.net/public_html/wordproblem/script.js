@@ -15,8 +15,17 @@ function setSaveButton() {
 	download(JSON.stringify({"text":textInput.value,"variables":variables}), filename+'.wps', 'text/plain');
 }
 
+function addVariable() {
+	variableName = avalibleVariableNames.pop();
+	newItem = document.createElement("div");
+	newItem.id = variableName+"Div";
+	newTextBox = document.createElement("input");
+	newTextBox.id = variableName+"TextBox";
+	newItem.appendChild(newTextBox);
+	variablesDiv.appendChild(newItem);
+}
+
 textInput.oninput = setSaveButton;
 setSaveButton();
-variablesToHTML();
 
 
